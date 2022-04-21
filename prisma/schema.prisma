@@ -52,7 +52,7 @@ model disciplines {
 
 model terms {
   id          Int           @id @default(autoincrement())
-  number      Int           @unique
+  number      String        @unique
   disciplines disciplines[]
 }
 
