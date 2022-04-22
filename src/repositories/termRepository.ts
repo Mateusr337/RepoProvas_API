@@ -1,12 +1,6 @@
-import { terms } from "@prisma/client";
 import client from "../database.js";
 
-export async function insert(name: string) {
-  const term = await client.terms.create({ data: { number: name } });
+export async function getByNumber(number: string) {
+  const term = await client.terms.findUnique({ where: { number } });
   return term;
-}
-
-export async function getAll() {
-  const terms = await client.terms.findMany({});
-  return terms;
 }
