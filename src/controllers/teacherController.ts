@@ -5,3 +5,8 @@ export async function insert(req: Request, res: Response) {
   const teacher = await teacherService.insert(req.body);
   res.status(201).send(teacher);
 }
+
+export async function getAll(req: Request, res: Response) {
+  const teachers = await teacherService.getAll();
+  res.send(teachers);
+}

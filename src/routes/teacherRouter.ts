@@ -13,4 +13,6 @@ routerTeacher.post(
   teacherController.insert
 );
 
+routerTeacher.get("/teachers", validateToken, teacherController.getAll);
+
 export default routerTeacher;

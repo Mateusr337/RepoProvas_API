@@ -10,3 +10,8 @@ export async function insert(data: teacherRepository.insertTeacherData) {
   const teacherInsert = await teacherRepository.insert(nameLowerCase);
   return teacherInsert;
 }
+
+export async function getAll() {
+  const teachers = await teacherRepository.getAllTeachers();
+  return teachers;
+}

@@ -27,6 +27,11 @@ export async function getTeacherDisciplineByIds(teacherId: number, disciplineId:
   return teacherDiscipline;
 }
 
+export async function getAllTeachers() {
+  const teachers = client.teachers.findMany();
+  return teachers;
+}
+
 export async function insertTeacherDiscipline(teacherId: number, disciplineId: number) {
   const teacherDiscipline = client.teachersDiciplines.create({
     data: { teacherId, disciplineId },
