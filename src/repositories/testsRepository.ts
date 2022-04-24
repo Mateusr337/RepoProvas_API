@@ -16,3 +16,22 @@ export type formatInsertData = Omit<tests, "id">;
 export async function insert(data: formatInsertData) {
   await client.tests.create({ data });
 }
+
+export async function getAll() {
+  const tests = await client.tests.findMany({
+    include: {
+      category: true,
+      teacherDiscipline: {
+        include: {
+          discipline: {
+            include: {
+              term: true,
+            },
+          },
+          teacher: true,
+        },
+      },
+    },
+  });
+  return tests;
+}

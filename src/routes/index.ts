@@ -2,6 +2,7 @@ import { Router } from "express";
 import authRouter from "./authRouter.js";
 import disciplinesRouter from "./disciplinesRouter.js";
 import routerTeacher from "./teacherRouter.js";
+import termRouter from "./termRouter.js";
 import testsRouter from "./testsRouter.js";
 import userRouter from "./userRouter.js";
 
@@ -12,5 +13,6 @@ router.use(authRouter);
 router.use(disciplinesRouter);
 router.use(testsRouter);
 router.use(routerTeacher);
+router.use(termRouter);
 
 export default router;

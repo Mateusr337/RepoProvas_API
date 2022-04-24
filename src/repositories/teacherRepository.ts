@@ -9,12 +9,14 @@ export async function getAll() {
 }
 
 export async function getByName(name: string) {
+  const nomeLower = name.toLowerCase();
   const teacher = client.teachers.findUnique({ where: { name } });
   return teacher;
 }
 
 export async function insert(name: string) {
-  const teacher = client.teachers.create({ data: { name } });
+  const nameLower = name.toLowerCase();
+  const teacher = client.teachers.create({ data: { name: nameLower } });
   return teacher;
 }
 

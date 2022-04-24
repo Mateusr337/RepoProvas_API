@@ -6,3 +6,8 @@ export async function insert(req: Request, res: Response) {
 
   res.sendStatus(201);
 }
+
+export async function findAll(req: Request, res: Response) {
+  const tests = await testsService.getAll();
+  res.send(tests);
+}

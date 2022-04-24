@@ -1,4 +1,3 @@
-import { teachers } from "@prisma/client";
 import * as testsRepository from "../repositories/testsRepository.js";
 import * as errorFunctions from "../utils/errorFunctions.js";
 import * as termRepository from "../repositories/termRepository.js";
@@ -15,7 +14,10 @@ export async function insert(data: testsRepository.InsertTestsData) {
   if (!teacher) teacher = await teacherRepository.insert(data.teacher);
   if (!discipline)
     discipline = await disciplinesRepository.insert({ name: data.discipline, termId });
-  if (!category) category = await categoryRepository.insert(data.category);
+  if (!category) {
+    const categoryNameFormat = data.rec === "yes" ? data.category + "rec" : data.category;
+    category = await categoryRepository.insert(categoryNameFormat);
+  }
 
   let teachersDiscipline = await teacherRepository.getTeacherDisciplineByIds(
     teacher.id,
@@ -49,4 +51,9 @@ async function validateCategory(categoryName: string) {
   const categoryFormat = categoryName.trim();
   const category = await categoryRepository.getByName(categoryFormat);
   return category;
+}
+
+export async function getAll() {
+  const tests = await testsRepository.getAll();
+  return tests;
 }
