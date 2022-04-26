@@ -13,4 +13,6 @@ disciplinesRouter.post(
   disciplinesController.insert
 );
 
+disciplinesRouter.get("/disciplines/:name", validateToken, disciplinesController.getByName);
+
 export default disciplinesRouter;

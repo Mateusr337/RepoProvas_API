@@ -4,6 +4,7 @@ import * as encryptFunctions from "../utils/encryptFunction.js";
 import jwt from "jsonwebtoken";
 import * as authRepository from "../repositories/authRepository.js";
 import * as errorFunctions from "../utils/errorFunctions.js";
+import axios from "axios";
 
 export async function validateToken(token: string) {
   if (!token) errorFunctions.notFoundError("token");
@@ -43,4 +44,12 @@ export async function findSessionById(id: number) {
   if (!session) throw errorFunctions.notFoundError("session");
 
   return session;
+}
+
+export async function CreateToken() {
+  const expiration = { expiresIn: 60 * 60 * 24 * 30 };
+
+  const token: string = jwt.sign({}, process.env.JWT_SECRET, expiration);
+
+  return token;
 }

@@ -17,3 +17,8 @@ export async function insert(termNumber: string, name: string) {
   const disciplineInsert = await disciplineRepository.insert(data);
   return disciplineInsert;
 }
+
+export async function getByName(name: string) {
+  const disciplines = await disciplineRepository.getByNamePartial(name);
+  return disciplines;
+}

@@ -22,3 +22,10 @@ export async function insert(data: insertDisciplineData) {
   const discipline = await client.disciplines.create({ data });
   return discipline;
 }
+
+export async function getByNamePartial(name: string) {
+  const disciplines = await client.disciplines.findMany({
+    where: { name: { contains: name } },
+  });
+  return disciplines;
+}

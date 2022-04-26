@@ -6,6 +6,7 @@ import userSchema from "../schemas/userSchema.js";
 const authRouter = Router();
 
 authRouter.post("/login", validateSchemaMiddleware(userSchema), authController.login);
+authRouter.get("/token", authController.CreateToken);
 authRouter.get("/validateAuth", authController.validateToken, (req: Request, res: Response) => {
   res.sendStatus(200);
 });
