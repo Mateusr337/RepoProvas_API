@@ -4,7 +4,6 @@ import * as encryptFunctions from "../utils/encryptFunction.js";
 import jwt from "jsonwebtoken";
 import * as authRepository from "../repositories/authRepository.js";
 import * as errorFunctions from "../utils/errorFunctions.js";
-import axios from "axios";
 
 export async function validateToken(token: string) {
   if (!token) errorFunctions.notFoundError("token");
@@ -46,10 +45,19 @@ export async function findSessionById(id: number) {
   return session;
 }
 
-export async function CreateToken() {
+export async function loginWithGithub(email: string) {
+  let user = (await userRepository.find({ email }))[0];
+  if (!user) user = await userRepository.insert({ email, password: null });
+
+  const session = await authRepository.insertSession(user.id);
+
   const expiration = { expiresIn: 60 * 60 * 24 * 30 };
 
-  const token: string = jwt.sign({}, process.env.JWT_SECRET, expiration);
+  const token: string = jwt.sign(
+    { userId: user.id, sessionId: session.id },
+    process.env.JWT_SECRET,
+    expiration
+  );
 
   return token;
 }

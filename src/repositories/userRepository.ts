@@ -19,5 +19,6 @@ export async function find(userData: usersPartial) {
 }
 
 export async function insert(data: usersInsertData) {
-  await client.users.create({ data });
+  const user = await client.users.create({ data });
+  return user;
 }

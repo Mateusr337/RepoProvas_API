@@ -16,7 +16,9 @@ export async function validateToken(req: Request, res: Response, next: NextFunct
   next();
 }
 
-export async function CreateToken(req: Request, res: Response) {
-  const token = await authService.CreateToken();
+export async function loginWithGithub(req: Request, res: Response) {
+  const { email } = req.body;
+
+  const token = await authService.loginWithGithub(email);
   res.send(token);
 }
