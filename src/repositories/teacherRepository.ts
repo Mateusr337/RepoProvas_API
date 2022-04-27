@@ -10,7 +10,13 @@ export async function getAll() {
 
 export async function getByName(name: string) {
   const nomeLower = name.toLowerCase();
-  const teacher = client.teachers.findUnique({ where: { name } });
+  const teacher = client.teachers.findUnique({ where: { name: nomeLower } });
+  return teacher;
+}
+
+export async function getByNameAll(name: string) {
+  const nomeLower = name.toLowerCase();
+  const teacher = client.teachers.findMany({ where: { name: { contains: nomeLower } } });
   return teacher;
 }
 

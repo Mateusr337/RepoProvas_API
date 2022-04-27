@@ -15,3 +15,8 @@ export async function getAll() {
   const teachers = await teacherRepository.getAllTeachers();
   return teachers;
 }
+
+export async function getByName(name: string) {
+  const teachers = await teacherRepository.getByNameAll(name);
+  return teachers;
+}

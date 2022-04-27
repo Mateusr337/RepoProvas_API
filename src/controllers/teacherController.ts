@@ -10,3 +10,10 @@ export async function getAll(req: Request, res: Response) {
   const teachers = await teacherService.getAll();
   res.send(teachers);
 }
+
+export async function getByName(req: Request, res: Response) {
+  const { name } = req.params;
+
+  const teachers = await teacherService.getByName(name);
+  res.send(teachers);
+}

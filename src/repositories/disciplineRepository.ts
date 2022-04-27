@@ -26,6 +26,7 @@ export async function insert(data: insertDisciplineData) {
 export async function getByNamePartial(name: string) {
   const disciplines = await client.disciplines.findMany({
     where: { name: { contains: name } },
+    include: { term: true },
   });
   return disciplines;
 }

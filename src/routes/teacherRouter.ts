@@ -14,5 +14,6 @@ routerTeacher.post(
 );
 
 routerTeacher.get("/teachers", validateToken, teacherController.getAll);
+routerTeacher.get("/teachers/:name", validateToken, teacherController.getByName);
 
 export default routerTeacher;
